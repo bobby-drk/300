@@ -11,6 +11,29 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => 'home', function () {
+    return view('pages.home');
+}]);
+
+
+// Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/scores', ["as" => "scores", "uses" => 'ScoreController@index']);
+    Route::get('/pay', ["as" => "pay", "uses" => 'PayController@index']);
+    Route::get('/record/food', ["as" => "record_food", "uses" => 'PayController@recordFood']);
+    Route::get('/record/bowling', ["as" => "record_bowling", "uses" => 'PayController@recordBowling']);
+
+// });
+
+
+/*
+
+if you hit the site with home/?api_token=<token> the token will be checked, if valid user will be logged in
+authenticated pages will check to see if user is logged in.
+Ajax calls will pull the token from session and append it to call
+
+
+
+
+
+ */

@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Alert;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,9 @@ class Authenticate
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('login');
+                Alert::add("Not Authenticated", ["alert_type" => "danger"]);
+
+                return redirect()->route('home');
             }
         }
 
