@@ -23,16 +23,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+Route::group(['prefix' => 'api', 'middleware' => 'auth:api'], function () {
+    Route::post('ledger/record', ["as" => "ledger_record", "uses" => 'PayController@record']);
+
+});
+
 Route::get('logout', 'Auth\AuthController@logout');
-
-/*
-
-if you hit the site with home/?api_token=<token> the token will be checked, if valid user will be logged in
-authenticated pages will check to see if user is logged in.
-Ajax calls will pull the token from session and append it to call
-
-
-
-
-
- */

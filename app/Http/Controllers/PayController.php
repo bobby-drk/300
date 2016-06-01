@@ -17,6 +17,7 @@ class PayController extends Controller
         return view('pages.pay', $data);
     }
 
+
     /**
      * shows the record food page
      * @return view
@@ -40,5 +41,14 @@ class PayController extends Controller
         return view('pages.record_bowling', $data);
     }
 
+
+    /**
+     * shows the record bowling page
+     * @return view
+     */
+    public function record()
+    {
+        return $data;
+    }
 
 }
