@@ -5,6 +5,9 @@
             <ul class="nav navbar-nav">
                 <li class="{{ CustomHelpers::isActiveRoute('scores') }}"><a href="{{ route('scores')}}">Scores</a></li>
                 <li class="{{ CustomHelpers::isActiveRoute('pay') }}"><a href="{{ route('pay')}}">Pay</a></li>
+                @if (Auth::check())
+                    <li class='pull-right'><p class="navbar-text">{{Auth::user()->first_name}}</p></li>
+                @endif
             </ul>
 
         </div>
