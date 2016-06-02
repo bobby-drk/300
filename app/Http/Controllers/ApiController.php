@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Response;
-use Laravel\Lumen\Routing\Controller as BaseController;
+use Illuminate\Http\Response;
 
-class ApiController extends BaseController
+class ApiController extends Controller
 {
     /**
      *  status code from the HTTP standard
@@ -50,14 +49,18 @@ class ApiController extends BaseController
      * @param  array $data validation specific errors
      * @return
      */
-    public function respondWithError($message)
+    public function respondWithError($message, $data = [])
     {
-        return $this->respond([
-            "error" => [
+        $error_block['error'] = [
                 'message' => $message,
-                'status_code' => $this->getStatusCode()
-            ]
-        ]);
+                'status_code' => $this->getStatusCode(),
+            ];
+
+        if (!empty($data)) {
+            $error_block['error']['error_data'] = $data;
+        }
+
+        return $this->respond($error_block);
     }
 
     /**

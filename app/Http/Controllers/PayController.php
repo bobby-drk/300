@@ -42,13 +42,5 @@ class PayController extends Controller
     }
 
 
-    /**
-     * shows the record bowling page
-     * @return view
-     */
-    public function record()
-    {
-        return $data;
-    }
 
 }
