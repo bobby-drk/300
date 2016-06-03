@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
 class PayController extends Controller
 {
     /**
@@ -25,6 +28,8 @@ class PayController extends Controller
     public function recordFood()
     {
         $data = [];
+        // $data['users'] = User::all()->sortBy("first_name");
+        $data['users'] = User::where('id', '!=', Auth::id())->get();
 
         return view('pages.record_food', $data);
     }
