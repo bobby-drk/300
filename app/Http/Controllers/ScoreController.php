@@ -1,6 +1,6 @@
 <?php
 
-use Alert;
+//use Alert;
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 
