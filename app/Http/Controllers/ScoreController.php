@@ -3,6 +3,7 @@
 //use Alert;
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class ScoreController extends Controller
 {
@@ -17,7 +18,7 @@ class ScoreController extends Controller
         return view('pages.scores', $data);
     }
 
-    public function recordscore()
+    public function record()
     {
         $my_id = Auth::id();
         $score = Input::get('score');
@@ -26,8 +27,7 @@ class ScoreController extends Controller
         $new_score->user_id = $my_id;
         $new_score->score = $score;
         $new_score->save();
-
-        Alert::add("You recored your score successfully!");
-        return redirect()->route('scores');
+                
+        return $new_score->id;
     }
 }
