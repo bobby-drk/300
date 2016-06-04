@@ -4,6 +4,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
+use App\Models\Score;
 
 class ScoreController extends Controller
 {
@@ -22,12 +24,16 @@ class ScoreController extends Controller
     {
         $my_id = Auth::id();
         $score = Input::get('score');
+//        $score = 300;
         
-        $new_score = new Score ();
+        $new_score = new Score();
         $new_score->user_id = $my_id;
         $new_score->score = $score;
         $new_score->save();
-                
+        
+                      
         return $new_score->id;
     }
 }
+
+
