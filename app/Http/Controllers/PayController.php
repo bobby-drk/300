@@ -42,6 +42,7 @@ class PayController extends Controller
     public function recordBowling()
     {
         $data = [];
+        $data['users'] = User::where('id', '!=', Auth::id())->get();
 
         return view('pages.record_bowling', $data);
     }

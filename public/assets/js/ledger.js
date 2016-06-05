@@ -21,7 +21,7 @@ $(function() {
 
         $.post(url, data_array, function (_response) {
 
-            $('#message').html("$"+ amount + " divided by " + participates.length + " participants is " + _response.data.share)
+            $('#message').html("$"+ amount + " divided by " + _response.data.group_size + " participants is " + _response.data.share)
                 .removeClass()
                 .addClass("alert alert-success")
                 .show();
