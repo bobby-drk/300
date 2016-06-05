@@ -21,24 +21,38 @@ class PayApiController extends ApiController
             'debtor' => 'required|exists:users,id',
             'credit_type' => 'required|in:food,bowling',
             'amount' => 'required|numeric',
+         ], [
+            "debtor.required" => "Please select at least one participate",
+            "debtor.exists" => "Internal Error: 3965",
+            "credit_type.required" => "Internal Error: 9845",
+            "credit_type.in" => "Internal Error: 8873",
          ]);
 
         if ($validator->fails()) {
             return $this->responseBadRequest("Bad Request", $validator->messages());
         }
 
-        $user = Auth::user();
+        $user           = Auth::user();
+        $debtors        = Input::get("debtor");
+        $total_amount   = Input::get("amount");
+        $credit_type    = Input::get("credit_type");
 
-        $ledger = new Ledger();
-        $ledger->creditor = $user->id;
-        $ledger->debtor = Input::get("debtor");
-        $ledger->credit_type = Input::get("credit_type");
-        $ledger->amount = Input::get("amount");
+        $share = round($total_amount / (sizeof($debtors) + 1), 2);
 
-        $ledger->save();
+        foreach ($debtors as $debtor) {
+            $flight = Ledger::create([
+                "creditor" =>  $user->id,
+                'debtor' => $debtor,
+                'credit_type' => $credit_type,
+                "amount" => $share,
+            ]);
+        }
 
         return $this->setStatusCode(201)->respond([
-            'data' => ["id" => $ledger->id]
+            'data' => [
+                "share" => $share,
+                "group_size" => (sizeof($debtors) + 1)
+            ]
         ]);
     }
 
