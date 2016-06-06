@@ -10,6 +10,7 @@
 
 @section('content')
 {{ Form::hidden('api_token', Auth::user()->api_token, array('id' => 'api_token')) }}
+{{ Form::hidden('credit_type', "food", array('id' => 'credit_type')) }}
 
     <div class='well'>
             <fieldset>

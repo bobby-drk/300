@@ -2,29 +2,42 @@ $(function() {
 
     $('#record_ledger').click(function () {
 
+        $('#message').html("");
         $('#frm_holder').hide();
         $('#ledger_loader').show();
 
         var url = "/api/v1/ledger/record?api_token=" + $('#api_token').val();
+        var participates =  $("input[name='debtor']:checked").map(function(){
+            return this.value;
+        }).get()
+        var amount = $('#ledger_amount').val();
         var data_array = {
             "_token" : $('meta[name="csrf-token"]').attr('content') ,
-            "amount" : $('#ledger_amount').val()
+            "amount" : amount,
+            "credit_type" : $('#credit_type').val(),
+            "debtor" : participates,
         };
+        $('#ledger_amount').val("");
 
         $.post(url, data_array, function (_response) {
-console.log(_response);
 
+            $('#message').html("$"+ amount + " divided by " + _response.data.group_size + " participants is " + _response.data.share)
+                .removeClass()
+                .addClass("alert alert-success")
+                .show();
         }).fail(function (_response) {
+            var message = _response.responseJSON.error.message;
 
-            $('#message').text(_response.responseJSON.error.message)
+            if (typeof _response.responseJSON.error.error_data != "undefined") {
+                for(i in _response.responseJSON.error.error_data) {
+                    message += "<div class='indent_offset_l'>" + _response.responseJSON.error.error_data[i] + "</div>";
+                }
+            }
+
+            $('#message').html(message)
                 .removeClass()
                 .addClass("alert alert-danger")
                 .show();
-
-// console.log(_response.responseJSON);
-
-// alert("message: " + _response.responseJSON.error.message);
-
 
         }).always(function (){
             $('#ledger_loader').hide();

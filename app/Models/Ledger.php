@@ -17,8 +17,7 @@ class Ledger extends Model
      *
      * @var array
      */
-    protected $fillable = [
-    ];
+    protected $fillable = ['debtor', 'creditor', 'credit_type', 'amount'];
 
     /**
      * The attributes that should be hidden for arrays.

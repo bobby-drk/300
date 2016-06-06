@@ -11,19 +11,21 @@ class LedgerTest extends TestCase
     {
         //Given -  valid ledger data
         //create 2 users to besure they are in the DB
-        $users = factory(App\Models\User::class, 2)->create();
+        $users = factory(App\Models\User::class, 4)->create();
 
         $ledger = [
-            "debtor" => $users[1]->id,
+            "debtor" => [$users[1]->id, $users[2]->id, $users[3]->id],
             "credit_type" => "food",
-            "amount" => "5.00",
+            "amount" => "8.00",
         ];
 
         //When - url is hit
         $response = $this->getJson('/api/v1/ledger/record?api_token='. $users[0]->api_token, 'POST', $ledger);
 
         //Then - a ledger is create in the db
-        $this->seeInDatabase('ledger', ['id' => $response->data->id]);
+        $this->seeInDatabase('ledger', ['debtor' => $users[1]->id, 'amount' => 2.00, "credit_type" => "food"]);
+        $this->seeInDatabase('ledger', ['debtor' => $users[2]->id, 'amount' => 2.00, "credit_type" => "food"]);
+        $this->seeInDatabase('ledger', ['debtor' => $users[3]->id, 'amount' => 2.00, "credit_type" => "food"]);
 
         //Then - a 201 status is returned
         $this->assertResponseStatus(201);
