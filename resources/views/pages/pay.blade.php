@@ -5,10 +5,8 @@ Pay Place
 @stop
 
 @section('content')
-    Show Pay Turns<br />
-    who paid last time<br/>
 
-<div><a href="{{ route("record_food") }}">Record Food</a></div>
-<div><a href="{{ route("record_bowling") }}">Record Bowling</a></div>
+<a href="{{ route("record_food") }}" class="btn btn-default btn-sm btn-block">Record Food</a>
+<a href="{{ route("record_bowling") }}" class="btn btn-default btn-sm btn-block">Record Bowling</a>
 
 @stop

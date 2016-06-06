@@ -17,6 +17,8 @@ class PayController extends Controller
         // $data['friends'] = User::find($my_id)->friends;
         // return  User::with('friends')->find($user->id);
 
+
+
         return view('pages.pay', $data);
     }
 

@@ -26,4 +26,5 @@ class Ledger extends Model
      */
     protected $hidden = [
     ];
+
 }
