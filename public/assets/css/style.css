@@ -5,6 +5,9 @@
 .vertical_offset_xl     { margin-top: 50px; }
 .vertical_offset_xxl    { margin-top: 100px; }
 
+.weak_small_boarder { margin-right:-5px; margin-left:-5px;}
+.strong_small_boarder { margin-right:10px; margin-left:10px;}
+
 .indent_offset_xsm    { margin-left: 5px; }
 .indent_offset_s      { margin-left: 10px; }
 .indent_offset_m      { margin-left: 15px; }
