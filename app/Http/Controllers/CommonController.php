@@ -15,4 +15,11 @@ class CommonController extends Controller
         $data = [];
         return view('pages.home', $data);
     }
+
+    public function dashboard()
+    {
+        $data = [];
+        return view('pages.dashboard', $data);
+    }
+
 }
