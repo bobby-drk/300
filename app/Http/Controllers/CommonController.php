@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Services\Balance;
 
 class CommonController extends Controller
 {
@@ -19,6 +19,11 @@ class CommonController extends Controller
     public function dashboard()
     {
         $data = [];
+
+        $balance = new Balance();
+
+        $balance_sheet = $balance->getBalanceSheet();
+
         return view('pages.dashboard', $data);
     }
 
