@@ -21,8 +21,7 @@ class CommonController extends Controller
         $data = [];
 
         $balance = new Balance();
-
-        $balance_sheet = $balance->getBalanceSheet();
+        $data['balance_ratio'] = $balance->getUserBalanceRatio();
 
         return view('pages.dashboard', $data);
     }

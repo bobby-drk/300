@@ -8,32 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class Balance
 {
-    public function getBalanceSheet()
+    public function getUserBalanceRatio()
     {
-        //pull all data out of ledger
-            //add up all of the IOUs (OWE)
-            //add up all of the UOMes (PAID)
-            //divide PAID/OWE
-            //debtor owes creditor
-
-
-        //SUM where creditor = x AND debtor = y
-
-/*
-SELECT creditor, debtor, SUM(amount) as sum
-FROM ledger
-GROUP BY creditor, debtor
-*/
         $ledger_data = DB::table('ledger')
             ->select(DB::raw('creditor, debtor, SUM(amount) as sum'))
             ->groupBy('creditor', 'debtor')
             ->get();
 
-        // $users = new \Illuminate\Database\Eloquent\Collection;
-        // reorg the array
         $users = User::all();
-
-
         $ledger = [];
         foreach ($ledger_data as $i => $row) {
 
@@ -59,7 +41,7 @@ GROUP BY creditor, debtor
 
                 if ($ledger[$user->id]['mooched'] > 0) {
                     //divide paid/mooched
-                    $user->pay_ratio = ($ledger[$user->id]['paid']  / $ledger[$user->id]['mooched']) ;
+                    $user->pay_ratio = round($ledger[$user->id]['paid']  / $ledger[$user->id]['mooched'], 3) ;
                 } else {
                     $user->pay_ratio = $ledger[$user->id]['paid'];
                 }
@@ -69,92 +51,6 @@ GROUP BY creditor, debtor
             }
         }
 
-echo "<pre>";
-print_r($users);
-
-        // foreach ($ledger as $creditor => $clients) {
-
-        //     foreach ($users as $i => $user) {
-        //         if (!isset($clients[$user->id]) && $user->id != $creditor) {
-        //             $ledger[$creditor][$user->id] = 0;
-        //         }
-        //     }
-
-        // }
-
-
-
-
-// print_r($ledger);
-
-//         $adjustments = [];
-//         foreach($users as $creditor => $clients) {
-
-//             foreach($clients as $debtor => $sum) {
-
-//                 if(isset($users[$debtor][$creditor])) {
-//                     $adjustments[$creditor][$debtor] = ($users[$creditor][$debtor] - $users[$debtor][$creditor]);
-//                 }
-//             }
-//         }
-
-// print_r($adjustments);
-
-//         foreach($users as $creditor => $clients) {
-//             foreach($clients as $debtor => $sum) {
-//                 if (isset($adjustments[$creditor][$debtor] )) {
-//                     $users[$creditor][$debtor] = $adjustments[$creditor][$debtor];
-//                 }
-//             }
-//         }
-
-
-
-
-
-
-            // if (!$users->contains('id', $row->creditor)) {
-
-            //     echo "made " . $row->creditor . "<br />\n";
-
-            //     $user = User::find($row->creditor);
-
-                // $user->favors = new \Illuminate\Database\Eloquent\Collection;
-
-                // if (!$users->contains('id', $row->creditor)) {
-
-
-                // $users->add($user);
-            // }
-
-
-
-
-
-
-
-/*
-down vote
-accepted
-It's not really Eloquent, it's:
-
-$c = new \Illuminate\Database\Eloquent\Collection;
-And then you can
-
-$c->add(new Post);
-*/
-
-
-        // }
-// print_r($users);
-print_r($ledger_data);
-echo "</pre>";
-echo "print_r located in <a href='#' title= '" . __FILE__ . "'>file</a> on line " . __LINE__;
-exit;
-
-
-
-        //add the data into user groups
-        //return
+        return $users->pluck('pay_ratio', 'first_name')->sort();
     }
 }

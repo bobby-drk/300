@@ -52,6 +52,9 @@ hr {
 .zebra > :nth-child(even){
     background-color:#f2f2f2;
 }
+
+
+
 .navbar-collapse.collapse {
     display: block!important;
 }
