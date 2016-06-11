@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Ledger extends Model
 {
@@ -26,5 +27,23 @@ class Ledger extends Model
      */
     protected $hidden = [
     ];
+
+    static function getLastPaid()
+    {
+        $array = [];
+        $results = DB::table('ledger')
+            ->select(DB::raw('creditor, MAX(created_at) as last_paid'))
+            ->groupBy('creditor')
+            ->get();
+
+
+        foreach ($results as $i => $data) {
+            $array[$data->creditor] = date('m-d-Y', strtotime($data->last_paid));
+        }
+
+
+        return $array;
+    }
+
 
 }

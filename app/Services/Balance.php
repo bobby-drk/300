@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Ledger;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use CustomHelpers;
 
 class Balance
 {
@@ -51,6 +52,7 @@ class Balance
             }
         }
 
-        return $users->pluck('pay_ratio', 'first_name')->sort();
+        return $users->sortBy("pay_ratio");
     }
+
 }

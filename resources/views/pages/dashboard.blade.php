@@ -10,22 +10,30 @@
             <tr>
                 <th>Bowler</th>
                 <th>Pay Ratio</th>
+                <th>Last Paid</th>
             </tr>
             @var('i', 0)
-            @foreach($balance_ratio as $user => $ratio)
+            @foreach($balance_ratio as $id => $user)
                 <tr @if($i == 0)
                     class='danger'
                 @elseif ($i == 1)
                     class='warning'
                 @endif >
 
-                    <td >{{$user}}</td>
-                    <td >{{number_format($ratio - 1, 3)}}</td>
+                    <td >{{$user->first_name}}</td>
+                    <td >{{number_format($user->pay_ratio, 3)}}</td>
+                    <td >
+                        @if(isset($paid_dates[$user->id]))
+                            {{ $paid_dates[$user->id] }}
+                        @else
+                            &nbsp;
+                        @endif
+                    </td>
                 </tr>
                 <!-- {{ $i++ }} -->
             @endforeach
         </table>
-        <div>* zero means fully paid, fully played</div>
+        <div>* 1 means fully paid, fully played</div>
 
 <br />
 <br />
