@@ -41,6 +41,8 @@
 <br />
 
         <div>PR</div>
+        <div>{{$pr}}</div>
+        <br />
         <div>Bowling Scores over time graph</div>
     </div>
 @stop
