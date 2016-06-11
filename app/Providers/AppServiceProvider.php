@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Blade::directive('var', function($expression) {
+            $regex = "/\((['\"])([\w_]+)\\1,\s*([^\)]+)\)/";
+            return preg_replace($regex, '<?php $$2 = $3; ?>', $expression);
+         });
     }
 
     /**

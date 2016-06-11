@@ -12,7 +12,7 @@
 {{ Form::hidden('api_token', Auth::user()->api_token, array('id' => 'api_token')) }}
 {{ Form::hidden('credit_type', "food", array('id' => 'credit_type')) }}
 
-    <div class='well'>
+    <div class='well strong_small_boarder'>
             <fieldset>
                 <legend><i class='glyphicon glyphicon-ice-lolly-tasted'></i> Record Food</legend>
 
