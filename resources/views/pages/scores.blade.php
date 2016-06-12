@@ -47,7 +47,6 @@
 
             </fieldset>
     </div>
-{{$pr}}
 
 
 @stop
