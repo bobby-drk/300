@@ -30,6 +30,7 @@ class CommonController extends Controller
         $data['paid_dates'] = Ledger::getLastPaid();
         
         $data['pr'] = Score::where('user_id', Auth::id())->max('score');
+        $data['avg'] = Score::where('user_id', Auth::id())->avg('score');
 
         return view('pages.dashboard', $data);
     }

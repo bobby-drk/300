@@ -43,6 +43,9 @@
         <div>PR</div>
         <div>{{$pr}}</div>
         <br />
+        <div>Average</div>
+        <div>{{round($avg)}}</div>
+        <br />
         <div>Bowling Scores over time graph</div>
     </div>
 @stop

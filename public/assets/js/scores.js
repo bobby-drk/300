@@ -11,9 +11,11 @@ $(function() {
             "_token" : $('meta[name="csrf-token"]').attr('content') ,
             "score" : $('#bowling_score').val()
         };
-
+        
+        $('#bowling_score').val("");
+        
         $.post(url, data_array, function (_response) {
-console.log(_response);
+
 
         $('#message').html("Your Score Has Been Recorded!")
                 .removeClass()
