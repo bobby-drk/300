@@ -36,16 +36,29 @@
         <div>* 1 means fully paid, fully played</div>
 
 <br />
-<br />
-<br />
-<br />
 
-        <div>PR</div>
-        <div>{{$pr}}</div>
-        <br />
-        <div>Average</div>
-        <div>{{round($avg)}}</div>
-        <br />
-        <div>Bowling Scores over time graph</div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Bowling Scores Info</h3>
+            </div>
+            <div class="panel-body">
+                <table class='table'>
+                    <tr>
+                        <th>PR</th>
+                        <th>Average</th>
+                    </tr>            
+                    <tr >
+                        <td >{{$pr}}</td>
+                        <td >{{round($avg)}}</td>                    
+                    </tr>                        
+                </table>
+                <br />
+                <div>
+                    Bowling Scores over time graph
+                </div>
+            </div>
+        </div>
+
+
     </div>
 @stop
