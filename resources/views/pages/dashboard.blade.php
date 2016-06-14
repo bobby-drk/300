@@ -20,7 +20,7 @@
                     class='warning'
                 @endif >
 
-                    <td >{{$user->first_name}}</td>
+                    <td >{{$user->first_name}} @if ($user->id == Auth::id()) - <a href="{{ route("mybalance") }}">My Balance</a>@endif</td>
                     <td >{{number_format($user->pay_ratio, 3)}}</td>
                     <td >
                         @if(isset($paid_dates[$user->id]))

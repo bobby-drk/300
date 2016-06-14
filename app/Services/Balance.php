@@ -6,6 +6,7 @@ use App\Models\Ledger;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use CustomHelpers;
+use Illuminate\Support\Facades\Auth;
 
 class Balance
 {
@@ -53,6 +54,60 @@ class Balance
         }
 
         return $users->sortBy("pay_ratio");
+    }
+
+    public function getMyBalance($me)
+    {
+        $balance = [];
+        $users = User::where('id', '!=', Auth::id())->get();
+
+        $rec_array = DB::table('ledger')
+            ->select(DB::raw('debtor, SUM(amount) as sum'))
+            ->where("creditor", $me)
+            ->groupBy('debtor')
+            ->get();
+
+        $receivables = [];
+        foreach ($rec_array as $i => $transaction) {
+            $receivables[$transaction->debtor] = $transaction->sum;
+        }
+unset($receivables[3]);
+        $pay_array = DB::table('ledger')
+            ->select(DB::raw('creditor, SUM(amount) as sum'))
+            ->where("debtor", $me)
+            ->groupBy('creditor')
+            ->get();
+
+        $payables = [];
+        foreach ($pay_array as $i => $transaction) {
+            $payables[$transaction->creditor] = $transaction->sum;
+        }
+unset($payables[4]);
+
+        foreach($users as $i => $user) {
+
+            if (isset($receivables[$user->id]) && isset($payables[$user->id])) {
+                $user->balance = $receivables[$user->id] - $payables[$user->id];
+            } else if (isset($receivables[$user->id]))  {
+                $user->balance = $receivables[$user->id];
+            } else if (isset($payables[$user->id]))  {
+                $user->balance = 0 - $payables[$user->id];
+            }
+
+
+        }
+
+
+echo "<pre>";
+print_r($receivables);
+print_r($payables);
+print_r($users);
+echo "</pre>";
+echo "print_r located in <a href='#' title= '" . __FILE__ . "'>file</a> on line " . __LINE__;
+exit;
+
+
+        return $balance;
     }
 
 }

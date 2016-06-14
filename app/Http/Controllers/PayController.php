@@ -8,6 +8,7 @@ use Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use App\Models\Ledger;
+use App\Services\Balance;
 
 
 class PayController extends ApiController
@@ -100,5 +101,20 @@ class PayController extends ApiController
             ]
         ]);
     }
+
+   /**
+     * show who I owe and who owes me
+     * @return view
+     */
+    public function myBalance()
+    {
+        $data = [];
+        $balance = new Balance();
+        $data['balance_sheet'] = $balance->getMyBalance(Auth::id());
+
+        return view('pages.mybalance', $data);
+
+    }
+
 
 }
