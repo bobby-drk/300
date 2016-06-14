@@ -5,38 +5,43 @@
 @stop
 
 @section('content')
-    <div class="row well strong_small_boarder">
-        <table class='table table-striped'>
-            <tr>
-                <th>Bowler</th>
-                <th>Pay Ratio</th>
-                <th>Last Paid</th>
-            </tr>
-            @var('i', 0)
-            @foreach($balance_ratio as $id => $user)
-                <tr @if($i == 0)
-                    class='danger'
-                @elseif ($i == 1)
-                    class='warning'
-                @endif >
-
-                    <td >{{$user->first_name}}</td>
-                    <td >{{number_format($user->pay_ratio, 3)}}</td>
-                    <td >
-                        @if(isset($paid_dates[$user->id]))
-                            {{ $paid_dates[$user->id] }}
-                        @else
-                            &nbsp;
-                        @endif
-                    </td>
-                </tr>
-                <!-- {{ $i++ }} -->
-            @endforeach
-        </table>
-        <div>* 1 means fully paid, fully played</div>
-
-<br />
-
+<!--    <div class="row well strong_small_boarder">-->
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">Payment Chart</h3>
+            </div>
+            <div class="panel-body">
+                <table class='table table-striped'>
+                    <tr>
+                        <th>Bowler</th>
+                        <th>Pay Ratio</th>
+                        <th>Last Paid</th>
+                    </tr>
+                    @var('i', 0)
+                    @foreach($balance_ratio as $id => $user)
+                    <tr @if($i == 0)
+                        class='danger'
+                        @elseif ($i == 1)
+                            class='warning'
+                        @endif >
+                        <td >{{$user->first_name}}</td>
+                        <td >{{number_format($user->pay_ratio, 3)}}</td>
+                        <td >
+                            @if(isset($paid_dates[$user->id]))
+                                {{ $paid_dates[$user->id] }}
+                            @else
+                                &nbsp;
+                            @endif
+                        </td>
+                    </tr>
+                        <!-- {{ $i++ }} -->
+                    @endforeach
+                </table>
+                    <br />
+                <div class="panel-footer">* 1 means fully paid, fully played</div>
+            </div>
+        </div>
+        
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Bowling Scores Info</h3>
@@ -58,7 +63,5 @@
                 </div>
             </div>
         </div>
-
-
-    </div>
+    <!--</div>-->
 @stop
