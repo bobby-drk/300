@@ -38,14 +38,16 @@ class Balance
         }
 
         foreach ($users as $i => $user) {
+            $mooched    = isset($ledger[$user->id]['mooched']) ? $ledger[$user->id]['mooched'] : 0 ;
+            $paid       = isset($ledger[$user->id]['paid']) ? $ledger[$user->id]['paid'] : 0 ;
 
             if (isset($ledger[$user->id])) {
 
-                if ($ledger[$user->id]['mooched'] > 0) {
+                if ($mooched > 0) {
                     //divide paid/mooched
-                    $user->pay_ratio = round($ledger[$user->id]['paid']  / $ledger[$user->id]['mooched'], 3) ;
+                    $user->pay_ratio = round($paid  / $mooched, 3) ;
                 } else {
-                    $user->pay_ratio = $ledger[$user->id]['paid'];
+                    $user->pay_ratio = $paid;
                 }
             } else {
 
