@@ -71,7 +71,7 @@ class Balance
         foreach ($rec_array as $i => $transaction) {
             $receivables[$transaction->debtor] = $transaction->sum;
         }
-unset($receivables[3]);
+
         $pay_array = DB::table('ledger')
             ->select(DB::raw('creditor, SUM(amount) as sum'))
             ->where("debtor", $me)
@@ -82,7 +82,7 @@ unset($receivables[3]);
         foreach ($pay_array as $i => $transaction) {
             $payables[$transaction->creditor] = $transaction->sum;
         }
-unset($payables[4]);
+
 
         foreach($users as $i => $user) {
 
@@ -93,21 +93,9 @@ unset($payables[4]);
             } else if (isset($payables[$user->id]))  {
                 $user->balance = 0 - $payables[$user->id];
             }
-
-
         }
 
-
-echo "<pre>";
-print_r($receivables);
-print_r($payables);
-print_r($users);
-echo "</pre>";
-echo "print_r located in <a href='#' title= '" . __FILE__ . "'>file</a> on line " . __LINE__;
-exit;
-
-
-        return $balance;
+        return $users;
     }
 
 }
