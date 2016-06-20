@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
 // Route::group(['prefix' => 'api/v1', 'middleware' => 'auth:api'], function () {
 Route::group(['prefix' => 'api/v1'], function () {
     Route::post('/ledger/record', ["as" => "ledger_record", "uses" => 'PayController@record']);
+    Route::post('/score/record', ["as" => "score_record", "uses" => 'ScoreController@record']);
 
 });
 
