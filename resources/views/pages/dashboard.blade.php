@@ -24,20 +24,7 @@
                         @elseif ($i == 1)
                             class='warning'
                         @endif >
-                    <td >{{$user->first_name}} @if ($user->id == Auth::id()) - <a href="{{ route("mybalance") }}">My Balance</a>@endif</td>
-                    <td >{{number_format($user->pay_ratio, 3)}}</td>
-                    <td >
-                        @if(isset($paid_dates[$user->id]))
-                            {{ $paid_dates[$user->id] }}
-                        @else
-                            &nbsp;
-                        @endif
-                    </td>
-                </tr>
-                <!-- {{ $i++ }} -->
-            @endforeach
-        </table>
-                        <td >{{$user->first_name}}</td>
+                        <td >{{$user->first_name}} @if ($user->id == Auth::id()) - <a href="{{ route("mybalance") }}">My Balance</a>@endif</td>
                         <td >{{number_format($user->pay_ratio, 3)}}</td>
                         <td >
                             @if(isset($paid_dates[$user->id]))
@@ -47,14 +34,14 @@
                             @endif
                         </td>
                     </tr>
-                        <!-- {{ $i++ }} -->
+                    <!-- {{ $i++ }} -->
                     @endforeach
                 </table>
                     <br />
                 <div class="panel-footer">* 1 means fully paid, fully played</div>
             </div>
         </div>
-        
+
         <div class="panel panel-info">
             <div class="panel-heading">
                 <h3 class="panel-title">Bowling Scores Info</h3>
@@ -64,11 +51,11 @@
                     <tr>
                         <th>PR</th>
                         <th>Average</th>
-                    </tr>            
+                    </tr>
                     <tr >
                         <td >{{$pr}}</td>
-                        <td >{{round($avg)}}</td>                    
-                    </tr>                        
+                        <td >{{round($avg)}}</td>
+                    </tr>
                 </table>
                 <br />
                 <div>
