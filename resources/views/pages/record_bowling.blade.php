@@ -27,7 +27,7 @@
                     <div class="row">
                         <div class="col-md-2">
                             {!! Form::label('amount', 'Total Amount') !!}
-                            {!! Form::text('amount', "", ["id" => "ledger_amount", "class" => "form-control"]) !!}
+                            {!! Form::number('amount', "", ["id" => "ledger_amount", "class" => "form-control"]) !!}
                         </div>
                     </div>
                         @include('includes.user_select')
