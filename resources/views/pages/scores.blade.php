@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <label class="control-label">Bowling Score</label>
                         <div class="input-group">
-                            {!! Form::text('score', "", ["id" => "bowling_score", "class" => "form-control"]) !!}
+                            {!! Form::number('score', "", ["id" => "bowling_score", "class" => "form-control"]) !!}
                             <span class="input-group-btn">
                                 {!!Form::button('Record', ["id" => "record_score", "class"=>"btn btn-primary"])!!}
                             </span>
