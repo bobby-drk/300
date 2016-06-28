@@ -21,6 +21,7 @@
     <script src="{{ URL::asset('assets/js/jquery-2.2.0.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/main.js') }}"></script>
+    <script src="https://use.fontawesome.com/9076faeeff.js"></script>
 @stack('page-js')
 </body>
 </html>

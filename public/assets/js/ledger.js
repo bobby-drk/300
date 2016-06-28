@@ -45,4 +45,13 @@ $(function() {
         });
     });
 
+    $('#add_guest').click(function () {
+        var d = new Date();
+        var s = d.getSeconds();
+        var m = d.getMilliseconds();
+
+        $('.user_list').last().after("<div class='user_list vertical_offset_s indent_offset_l'><input id='guest_"+s+m+"' checked='checked' name='debtor' type='checkbox' value='guest'> <label for='guest_"+s+m+"'> <input type='text' class='form-control input-sm' name='guest_"+s+m+"' placeholder='Guest' /></label></div>");
+
+
+    });
 });
