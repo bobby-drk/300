@@ -31,6 +31,7 @@
                         </div>
                     </div>
                         @include('includes.user_select')
+                        @include('includes.guest')
 
                     <div class="row vertical_offset_s">
                         <div class="col-md-4">
@@ -42,9 +43,5 @@
 
             </fieldset>
     </div>
-
-
-
-@stop
 
 @stop
